@@ -14,7 +14,7 @@
 		<u--text type="info" lineHeight="22" size="14" class="details" text="裁剪后点击“开始识别”，等待片刻系统会自动钢管数量和标注框等参数；">
 		</u--text>
 		<u--text type="info" lineHeight="22" size="14" class="details"
-			text="在新打开的识别结果页面中，页面下方将显示当前图片自动识别到的钢管数量和人工增加标注总数量，蓝色标注框为AI识别结果，绿色标注框为人工增加结果，点击图片可补点/去点，补点显示为绿色标注框，去点则将绿框删除或删除蓝色标注框，如遇到操作失误，可点击“撤回操作”还原上一步；">
+			text="在新打开的识别结果页面中，页面下方将显示当前图片自动识别到的钢管数量和人工增加标注总数量，蓝色标注框为AI识别结果，绿色标注框为人工增加结果，点击图片可补点/去点，补点显示为绿色标注框，去点则将绿框删除或删除蓝色标注框；">
 		</u--text>
 		<u--text type="info" lineHeight="22" size="14" class="details"
 			text="全部补点/去点操作完成后，请点击提交数据，图片和点位数据将回传到服务器做为新数据集优化更高的识别效果。"></u--text>
@@ -53,6 +53,7 @@
 					sourceType: ['album'], //从相册选择
 					success: function(res) {
 						var img = res.tempFilePaths[0];
+						console.log(img);
 						uni.navigateTo({
 							url: "/pages/cropp/cropp?url=" + img
 						});

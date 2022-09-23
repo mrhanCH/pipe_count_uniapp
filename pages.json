@@ -12,6 +12,12 @@
 				"navigationBarTitleText": "图片裁剪"
 			}
 
+		}, {
+			"path": "pages/result/result",
+			"style": {
+				"navigationBarTitleText": "识别结果"
+			}
+
 		}
 	],
 	"globalStyle": {

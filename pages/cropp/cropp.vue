@@ -40,30 +40,38 @@
 					title: "识别中，请稍等"
 				});
 				uni.uploadFile({
-					url: 'api.findNums',
+					url: 'http://127.0.0.1:8000/finds/',
 					filePath: that.imgSrc,
 					name: "image",
 					formData: {},
 					method: 'POST',
 					success: function(e) {
 						var i = JSON.parse(e.data);
-						console.log(i)
+						// console.log(i)
 						uni.hideLoading();
-						// var n = i.data;
-						// 200 === i.code ? (t.globalData.picRecognizeds = n.picRecognizeds, wx
-						// 	.navigateTo({
-						// 		url: "../operationResult/operationResult?recognitionCount=" + n
-						// 			.recognitionCount + "&recognitionId=" + n.recognitionId +
-						// 			"&resultUrl=" + that.data.src + "&width=" + n.width +
-						// 			"&height=" + n.height
-						// 	})) : wx.showToast({
-						// 	title: i.msg,
-						// 	icon: "none",
-						// 	duration: 2e3
-						// });
+						var n = i.data;
+						if (200 === i.code) {
+							getApp().globalData.picResult = n.picResult;
+							var newSize = that.imgInfo(n)
+							uni.navigateTo({
+								url: "/pages/result/result?resultCount=" + n.resultCount + "&resultUrl=" + n.picurl + "&picWidth=" + n.width + "&picHeight=" + n.height + "&canvasWidth=" + parseInt(newSize.nWidth) + "&canvasHeight=" + parseInt(newSize.nHeight) + "&name=" + n.name
+							})
+						} else {
+							uni.showToast({
+								title: i.msg,
+								icon: "none",
+								duration: 2e3
+							});
+						}
+
 					},
 					fail: function(t) {
 						uni.hideLoading();
+						uni.showToast({
+							title: '识别失败，请查看服务是否启动',
+							icon: "none",
+							duration: 2e3
+						});
 					}
 				});
 			},
@@ -75,6 +83,16 @@
 			},
 			oncancel() {
 				this.state = 0
+			},
+			imgInfo(n) {
+				var sys = uni.$u.sys(),
+					ratio = n.width / sys.windowWidth,
+					cH = ratio > 1 ? n.height / ratio : n.height,
+					cW = ratio > 1 ? sys.windowWidth : n.width;
+				return {
+					'nWidth': cW,
+					'nHeight': cH
+				}
 			}
 		}
 	}

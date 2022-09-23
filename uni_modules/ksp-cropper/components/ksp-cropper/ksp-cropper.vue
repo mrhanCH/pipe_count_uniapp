@@ -303,7 +303,7 @@ export default {
 			});
 		},
 		async cropAppH5() {
-			var mx = this.computeMatrix();
+			var mx = this.computeMatrix(),that = this;
 			this.target = {
 				width: mx.tw,
 				height: mx.th
@@ -326,16 +326,18 @@ export default {
 				canvasId: this.canvasId,
 				destWidth: mx.tw,
 				destHeight: mx.th,
+				fileType: 'jpg',
 				quality: 1,
 				success: (rst) => {
 					console.log("裁剪宽高",mx.tw,mx.th);
 					var path = rst.tempFilePath;
 					// #ifdef H5
 					var base64 = path;
-					path = this.parseBlob(path);
+					// path = this.parseBlob(path);
+					// path = this.base64ImgtoUrl(base64,'');
 					this.$emit("ok", {
 						path: path,
-						base64: base64
+						// base64: base64
 					});
 					// #endif
 					// #ifdef APP-PLUS
@@ -450,7 +452,7 @@ export default {
 			}
 			var url = URL || webkitURL;
 			return url.createObjectURL(new Blob([u8arr], {type: mime}));
-		},
+		}
 	}
 };
 </script>
