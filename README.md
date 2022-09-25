@@ -1,6 +1,6 @@
 # 钢管计数-uniapp
 
-![输入图片说明](doc/10.jpg) ![输入图片说明](doc/11.jpg)
+![输入图片说明](static/doc/10.jpg) ![输入图片说明](static/doc/11.jpg)
 
 #### 介绍
 钢管计数UNIAPP前端版本，使用uniapp框架进行开发。
