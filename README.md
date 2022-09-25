@@ -27,6 +27,8 @@ http://www.xxx.com/save    --->   保存结果接口
 
 #### 截图展示
 
+![image](static/doc/shiyongshuoming.gif)
+
 1、 项目首页
 
 ![image](static/doc/1.jpg)
